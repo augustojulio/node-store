@@ -11,11 +11,11 @@ describe('GET /', () => {
   });
 });
 
-describe('GET /product', () => {
+describe('GET /:productCode', () => {
   it('should show a product', (done) => {
     request(app)
-    .get('/1')
-    .expect(200, done)
+      .get('/1')
+      .expect(200, done)
   });
 });
 
@@ -27,4 +27,20 @@ describe('DB instance', () => {
       .expect('Content-Type', /json/)
       .expect(200, done)
   });
+
+  it('should remove item', (done) => {
+    request(app)
+      .delete('/2')
+      .expect('Content-Type', /json/)
+    done()
+  });
+
+  it('should update an item', (done => {
+    request(app)
+      .put('/3')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      done()
+
+  }))
 });
