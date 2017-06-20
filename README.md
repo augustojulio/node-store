@@ -3,7 +3,7 @@ This is a basic RESTAPI made using [nodejs](https://nodejs.org/en/) and [MongoDb
 
 I hope that you enjoy that!
 
-#What am i using?
+## What am i using?
 
 [Mongoose](http://mongoosejs.com/), [Express](https://expressjs.com/), [Mocha](https://mochajs.org/) and [body-parser](https://github.com/expressjs/body-parser)
 
