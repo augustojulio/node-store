@@ -1,40 +1,26 @@
-const express = require('express');
-const app = express();
-const chalk = require('chalk');
+const express = require('express'),
+  app = express(),
+  chalk = require('chalk'),
+  mongoose = require('mongoose'),
+  Product = require('./api/model/ProductModel'),
+  bodyParser = require('body-parser');
 
-const Product = require('./model/DbConfig.js').Product;
-const dbHelper = require('./model/DbHelper.js');
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/node_store');
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
+const routes = require('./api/routes/Routes');
+routes(app);
 
 
-const port = process.env.PORT || 3000;
-
-app.get('/', (req, res) => {
-  Product.find(function(err, products) {
-      if (err) return console.error(err);
-      res.json(products);
+const port = process.env.PORT || 3000,
+  server = app.listen(port, () => {
+    console.log('%s App is running at http://localhost:%d', chalk.green('✓'), port); 
   });
-});
-
-app.post('/', (req, res) => {
-    let newproduct = req.body;
-    let product = new Product(newproduct);
-    product.picture = "http://placehold.it/350x240";
-    dbHelper.saveToDB(product);
-
-    res.status(200).json(product);
-});
-
-app.get('/:productcode', (req, res) => {
-    var productcode = req.params.productcode;
-    Product.findOne({
-        productcode: productcode
-    }, function(err, product) {
-        res.json(product);
-    });
-});
-
-const server = app.listen(port, () => {
-  console.log('%s App is running at http://localhost:%d', chalk.green('✓'), port); 
-});
 
 module.exports = server;
