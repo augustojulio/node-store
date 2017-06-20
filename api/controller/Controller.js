@@ -10,11 +10,9 @@ exports.listAll = (req, res) => {
 };
 
 
-
-
 exports.create = (req, res) => {
   var newProduct = new Product(req.body);
-  newProduct.save(function(err, product) {
+  newProduct.save((err, product) => {
     if (err)
       res.send(err);
     res.json(product);
@@ -35,7 +33,7 @@ exports.getProductById = (req, res) => {
 exports.updateProduct = (req, res) => {
   Product.findOneAndUpdate(req.params.productId, req.body, {
     new: true
-  }, function(err, product) {
+  }, (err, product) => {
     if (err)
       res.send(err);
     res.json(product);
@@ -43,7 +41,7 @@ exports.updateProduct = (req, res) => {
 };
 
 
-exports.deleteProduct = function(req, res) {
+exports.deleteProduct = (req, res) => {
   Product.remove({
     _id: req.params.productId
   }, (err, product) => {

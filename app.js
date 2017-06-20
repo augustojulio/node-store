@@ -1,9 +1,11 @@
-const express = require('express'),
-  app = express(),
-  chalk = require('chalk'),
-  mongoose = require('mongoose'),
-  Product = require('./api/model/ProductModel'),
-  bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+
+const chalk = require('chalk');
+const mongoose = require('mongoose');
+
+const Product = require('./api/model/ProductModel');
+const bodyParser = require('body-parser');
 
 
 mongoose.Promise = global.Promise;

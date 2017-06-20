@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = (app) => {
   let product = require('../controller/Controller');
 
   app.route('/')
